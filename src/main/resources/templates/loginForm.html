@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Insert title here</title>
+  <style>
+    form.form-example {
+      display: table;
+    }
+
+    div.form-example {
+      display: table-row;
+    }
+
+    label, input {
+      display: table-cell;
+      margin-bottom: 10px;
+    }
+
+    label {
+      padding-right: 10px;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+  <script>
+    $(document).ready(function(){
+      $("#loginButton").click(loginFunc);
+    });
+    function loginFunc(){
+      $.ajax({
+        url: "/login",
+        data:{"id":$("#id").val(),"pw":$("#pw").val()},
+        dataType:"json",
+        success: function(data) {
+          console.log(data);
+          if(data.errorCode==-1)
+            $("#msgContainer").html(data.errorMsg);
+          else
+            location.href="/member/list";
+        }
+      });
+    }
+  </script>
+</head>
+<body>
+<div class="form-example">
+  <label for="id"> ID : </label>
+  <input type="text" name="id" id="id" required>
+</div>
+<div class="form-example">
+  <label for="pw">PW : </label>
+  <input type="text" name="pw" id="pw" required>
+</div>
+<div class="form-example">
+  <input type="button" value="로그인" id="loginButton">
+</div>
+<span id="msgContainer"></span>
+</body>
+</html>

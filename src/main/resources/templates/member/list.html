@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Insert title here</title>
+</head>
+<body>
+<h1>회원목록</h1>
+<form action="/member/remove">
+  <ol>
+    <li th:each="dto:${list}">
+      <input type="radio" name="id" th:value="${dto.id}" />
+      <a th:href="@{/member/detail/{id}(id=${dto.id})}">
+        <span th:text="${dto.id}"></span>
+      </a>
+    </li>
+  </ol>
+  <button>삭제</button>
+</form>
+<form action="/logout">
+  <button>로그아웃</button>
+</form>
+</body>
+</html>
